@@ -1,0 +1,44 @@
+# -*- coding: utf-8 -*-
+from gluon import current
+
+def getDadosProcesso(NUM_PROCESSO):
+	processo = current.dbSie.executesql("""SELECT DISTINCT D.ID_DOCUMENTO,
+														   D.NUM_PROCESSO,
+														   DBSM.RETIRAACENTOS( D.RESUMO_ASSUNTO ) AS RESUMO_ASSUNTO,
+														   D.EMITENTE,
+														   D.DT_ALTERACAO,
+														   D.HR_ALTERACAO,
+														   A.DESCR_ASSUNTO,
+														   A.COD_ESTRUTURADO
+														   FROM DBSM.DOCUMENTOS D LEFT JOIN DBSM.TRAMITACOES T ON D.ID_DOCUMENTO = T.ID_DOCUMENTO
+														   LEFT JOIN DBSM.TIPOS_DOCUMENTOS TD ON D.ID_TIPO_DOC = TD.ID_TIPO_DOC
+														   LEFT JOIN DBSM.TIPOS_DOCUMENTOS TD1 ON TD.ID_TIPO_DOC_SUP = TD1.ID_TIPO_DOC
+														   LEFT JOIN DBSM.ASSUNTOS A ON A.ID_ASSUNTO = D.ID_ASSUNTO
+														   WHERE TD1.ID_TIPO_DOC = 1
+                                                           AND D.IND_
+  											AND D.ID_DOCUMENTO = """ + NUM_PROCESSO + """""", as_dict=True)
+	if processo:
+		return processo[0]
+	else:
+		raise Exception("Processo não encontrado")
+	
+def getTramitacoes(ID_DOCUMENTO):
+	return current.dbSie.executesql("""SELECT D.NUM_PROCESSO,
+											  T.DT_ENVIO,
+											  REPLACE( CONCAT(CONCAT(CAST(T.DT_RECEBIMENTO AS VARCHAR(20)),' '),CAST(T.HR_RECEBIMENTO AS VARCHAR(20))), '.',':') AS DT_RECEBIMENTO,
+											  T.ID_ORIGEM,
+											  T.ID_DESTINO,
+											  DBSM.RETIRAACENTOSCLOB( T.DESPACHO ) AS DESPACHO,
+											  DBSM.RETIRAACENTOS( F.DESCR_FLUXO ) AS DESCR_FLUXO
+									   FROM   DBSM.DOCUMENTOS D,
+                									   DBSM.TRAMITACOES T,
+                									   DBSM.TIPOS_DOCUMENTOS TD,
+                									   DBSM.TIPOS_DOCUMENTOS TD1,
+                									   DBSM.FLUXOS F
+									   WHERE D.ID_DOCUMENTO = T.ID_DOCUMENTO
+  									   AND    D.ID_TIPO_DOC = TD.ID_TIPO_DOC
+  									   AND    TD.ID_TIPO_DOC_SUP = TD1.ID_TIPO_DOC
+  									   AND F.ID_FLUXO = T.ID_FLUXO
+  									   AND    TD1.ID_TIPO_DOC = 1
+  									   AND	 D.ID_DOCUMENTO = """ + str(ID_DOCUMENTO) + """
+									   ORDER BY T.SEQUENCIA""", as_dict=True)

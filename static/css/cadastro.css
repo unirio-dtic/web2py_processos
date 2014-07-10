@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+#divLogar {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 300px;
+    display: block;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: left;
+}
+
+#fieldCPF , #fieldSenha {
+    
+    width: 200px;
+    vertical-align: left;   
+}
+
+#fieldEmail{
+    width: 250px;
+}
+
+#btnConfirmar {
+    
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+#titulo {
+      text-align: center;
+}
+
+#mensagemEmail {
+    text-align: center;
+    border: thin;
+    background: linear-gradient(to bottom, #fefcea 0%,#FFFFC2 100%);
+    border-radius: 5px;
+}
+
+#divEmail {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 300px;
+    display: block;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: large;
+    text-align: center;
+}
+
+#novoEmail {
+    text-align: center;
+    border: thin;
+    background: linear-gradient(to bottom, #fefcea 0%,#FFFFC2 100%);
+    border-radius: 5px;
+    font-size: large;
+}
+
+#formNovoEmail {
+    text-align: center;
+}
+
+#senhaTemp {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 100px;
+    display: block;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center;
+    color: red;
+    font-size: large; 
+}
+
+#linkMail {
+    text-align: center;
+    font-size: large; 
+}
+
+#colorGreen {
+    color: green;
+}
+
+#bntCadastrarEmail{
+    
+    background-color: rgba(182, 221, 182, 0.34);
+    border-radius: 5px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 350px;
+    display: block;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: large; 
+}
+
+#porque{
+    
+     background-color: rgba(255, 0, 0, 0.26);
+    border-radius: 5px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 250px;
+    display: block;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: large; 
+    
+}
+
+#normatizacao{
+    
+    background-color: rgba(255, 0, 0, 0.26);
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+    display: block;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: smaller;
+}
+
+#criacaoEmail {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 300px;
+    display: block;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+#fieldEmailAlias , #fieldAlias {
+    
+    width: 130px;
+}

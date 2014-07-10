@@ -1,0 +1,60 @@
+#fundo-barra {
+    background: url("complemento_barra_unirio.png") repeat-x;
+
+}
+#barraunirio {
+    background: url("barraunirio") no-repeat;
+    height: 30px;
+    width: 100%;
+    position: relative;
+
+}
+#icones {
+  background: url("complemento_barra_unirio.png") repeat-x;
+  position:absolute;
+  right:5px;
+  top:4px;
+}
+
+#acesso{
+    left: 300px;
+    position: absolute;
+/*    top: 4px;*/
+bottom:5px;
+}
+
+#link{
+    left: 0px;
+    width:300px;
+    height:30px;
+    position: relative;
+}
+
+.escolha{
+    background:#F0F0F6;
+    width:170px;
+    height:20px; 
+    margin-left:15px;
+    font-weight:bold;
+}
+.escolha option[selected] {
+    margin-left:100px;
+text-transform:uppercase;
+}
+
+.escolha option {
+    margin-left:30px;
+}
+
+.grad {
+    color:#0000cc;
+}
+.pos{
+    color:#009900;
+}
+.exten{
+    color:#aa0000;
+}
+.dist{
+    color:#420000;
+}

@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+{{=form}}
+
+{{if processoCodigo:}}
+<p class='centered'>Processo: {{=processoCodigo}}</p>
+{{pass}}
+
+{{=tableDados}}
+
+{{if tableTramitacoes:}}
+<h2>Tramitações</h2>
+{{=tableTramitacoes}}
+{{pass}}

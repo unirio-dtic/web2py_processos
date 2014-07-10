@@ -1,0 +1,6 @@
+{
+	"title" : "Portal de Processos",
+	"description" : "Portal de consulta de processos da Universidade Federal do Estado do Rio de Janeiro",
+	"auth_req" : false,
+	"author" : "Diogo Magalhaes Martins"	
+}
