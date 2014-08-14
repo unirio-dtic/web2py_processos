@@ -1,55 +1,38 @@
 # -*- coding: utf-8 -*-
-from processoTable import *
+from ProcessosTable import *
 from tramitacoesTable import *
 import defaultTable
 import dbfunctions
 import forms
+from queryfilter import *
 
 def index():
     tableDados = None
     numProcesso = None
-    tableTramitacoes = None
-    processoCodigo = None
+    tableProcessos = None
+    processos = None
 
     form = FORM(
-                forms.printControlGroup( "Título", "titulo", INPUT(_name="titulo") ),
-                INPUT(_name="busca"),
+                forms.printControlGroup( "Descrição", "DESCR_ASSUNTO", INPUT(_name="DESCR_ASSUNTO") ),
+                forms.printControlGroup( "Nome do Interessado", "NOME_INTERESSADO", INPUT(_name="NOME_INTERESSADO") ),
+                forms.printControlGroup( "Emitente", "EMITENTE", INPUT(_name="EMITENTE") ),
+                forms.printControlGroup( "Número", "NUM_PROCESSO", INPUT(_name="NUM_PROCESSO") ),
                 INPUT(_type="submit")
                 )
 
     if form.process().accepted:
         try:
-            contents = dbfunctions.getDadosProcesso( form.vars.busca )
+            filtros = form.vars
+            queryFilter = QueryFilter(filtros)
+            processos = dbfunctions.getProcessos( queryFilter.getFilters() )
+            tableProcessos = ProcessosTable(processos, "Número,Nome,Data".split(",") ).printTable("table table-bordered")
 
-            processoCodigo = contents['NUM_PROCESSO']
-
-            contentsDict = {
-                            "Número Documento" : contents['ID_DOCUMENTO'],
-                            "Resumo Assunto" : contents['RESUMO_ASSUNTO'],
-                            "Nome do Interessado" : contents['NOME_TIPO_INTERESSADO'] + " - " + contents['NOME_INTERESSADO'],
-                            "Procedência" : contents['PROCEDENCIA'],
-                            "Código Assunto" : contents['COD_ESTRUTURADO'],
-                            "Assunto CONARQ" : contents['DESCR_ASSUNTO']
-                            }
-
-            tableDados = ProcessoTable( contentsDict )
-            tableDados = tableDados.printTable("table table-bordered")
-
-            tramitacoes = dbfunctions.getTramitacoes( contents['ID_DOCUMENTO'] )
-            tableTramitacoes = TramitacoesTable(
-                                                tramitacoes,
-                                                "Descrição Fluxo,Data Envio,Data Recebimento,Origem,Destino,Despacho,Recebido por".split(",")
-                                                )
-            tableTramitacoes = tableTramitacoes.printTable("table table-bordered")
         except Exception, e:
-            response.flash = e[0]
+            response.flash = e
 
     return dict(
                 form=form,
-                numProcesso=numProcesso,
-                tableDados=tableDados,
-                tableTramitacoes=tableTramitacoes,
-                processoCodigo=processoCodigo
+                tableProcessos=tableProcessos
                 )
 
 

@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+<a href='{{=URL('default','index')}}'>Voltar</a>
+<h1>Dados do Processo</h1>
+{{if processoCodigo:}}
+<p class='centered'>Processo: {{=processoCodigo}}</p>
+{{pass}}
+
+{{=tableDados}}
+
+{{if tableTramitacoes:}}
+<h2>Tramitações</h2>
+{{=tableTramitacoes}}
+{{pass}}

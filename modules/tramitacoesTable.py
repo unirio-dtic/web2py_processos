@@ -11,9 +11,8 @@ class TramitacoesTable(DefaultTable):
 		row.append( TD(content['DESCR_FLUXO'], _class=self._bodyTRclass) )
 		row.append( TD(content['DT_ENVIO'], _class=self._bodyTRclass) )
 		row.append( TD(content['DT_RECEBIMENTO'], _class=self._bodyTRclass) )
-		row.append( TD(content['ORIGEM'].decode('1252').encode('utf-8'), _class=self._bodyTRclass) )
-		row.append( TD(content['DESTINO'].decode('1252').encode('utf-8'), _class=self._bodyTRclass) )
+		row.append( TD(content['ORIGEM'], _class=self._bodyTRclass) )
+		row.append( TD(content['DESTINO'], _class=self._bodyTRclass) )
 		row.append( TD(content['DESPACHO'], _class=self._bodyTRclass) )
 		row.append( TD(content['RECEBIDO'], _class=self._bodyTRclass) )
 		return row
-	
