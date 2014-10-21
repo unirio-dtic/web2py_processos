@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from ProcessosTable import *
+from SIEProcesso import *
 from tramitacoesTable import *
 import defaultTable
-import dbfunctions
 import forms
 from queryfilter import *
 
@@ -10,7 +10,7 @@ def index():
     tableDados = None
     numProcesso = None
     tableProcessos = None
-    processos = None
+    sieprocessos = SIEProcesso()
 
     form = FORM(
                 forms.printControlGroup( "Descrição", "DESCR_ASSUNTO", INPUT(_name="DESCR_ASSUNTO") ),
@@ -20,12 +20,13 @@ def index():
                 INPUT(_type="submit")
                 )
 
+    proc = sieprocessos.getProcessos()
+    
     if form.process().accepted:
         try:
             filtros = form.vars
             queryFilter = QueryFilter(filtros)
-            processos = dbfunctions.getProcessos( queryFilter.getFilters() )
-            tableProcessos = ProcessosTable(processos, "Número,Nome,Data".split(",") ).printTable("table table-bordered")
+            tableProcessos = ProcessosTable(sieprocessos, "Número,Nome,Data".split(",") ).printTable("table table-bordered")
 
         except Exception, e:
             response.flash = e

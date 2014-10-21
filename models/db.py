@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-if request.env.web2py_runtime_gae:
-    db = DAL('gae')
-    session.connect(request, response, db = db)
-else:
-    from gluon import current
-    current.dbSie = dbSie
-
 #########################################################################
 ## Here is sample code if you need for
 ## - email capabilities
@@ -17,7 +10,6 @@ else:
 #########################################################################
 
 from gluon.tools import *
-from gluon.contrib.login_methods.ldap_auth import ldap_auth
 
 mail = Mail()                                  # mailer
 auth = Auth(globals(),db)                      # authentication/authorization
