@@ -41,6 +41,6 @@ class SIEProcessoTramitacoes(SIEProcesso):
         super(SIEProcessoTramitacoes, self).__init__()
         self.path = "V_PROCESSOS_TRAMITACOES"
 
-    def getTramitacoes(self, ID_DOCUMENTO):
-        params = {"ID_DOCUMENTO" : ID_DOCUMENTO}
+    def getTramitacoes(self, NUM_PROCESSO):
+        params = {"NUM_PROCESSO" : NUM_PROCESSO}
         return self.getContent(params)

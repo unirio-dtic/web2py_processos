@@ -23,7 +23,7 @@ def index():
 
             tableDados = ProcessoTable( contentsDict )
 
-            tramitacoes = tramitacoesAPI.getTramitacoes( processo["ID_DOCUMENTO"] )
+            tramitacoes = tramitacoesAPI.getTramitacoes( processo["NUM_PROCESSO"] )
             tableTramitacoes = TramitacoesTable(
                                                 tramitacoes,
                                                 "Descrição Fluxo,Data Envio,Data Recebimento,Origem,Destino,Despacho,Recebido por".split(",")
