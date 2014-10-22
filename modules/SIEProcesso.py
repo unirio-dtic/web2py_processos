@@ -16,6 +16,8 @@ class SIEProcesso(object):
         :type params: dict
         """
         limits = {"LMIN" : self.lmin, "LMAX" : self.lmax}
+        for k,v in params.items():
+            params[k] = str(params[k]).upper()
         params.update( limits )
 
         processos = self.apiRequest.performGETRequest(self.path, params)

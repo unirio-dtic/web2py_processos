@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from gluon.html import *
-import dbfunctions
 
 def printControlGroup(labelTitle, labelFor, controlContent):
     return DIV(
@@ -16,6 +15,3 @@ def printSelectbox(itensDict, value, text):
     for i in itensDict:
         options.append( OPTION( i[text], _value=i[value] ) )
     return SELECT( options, _class="combo", _name=text )
-
-#def printAreaSelectbox():
-#    return printSelectbox( dbfunctions.getAreasTematicas(), 'ID_CLASSIFICACAO', 'DESCRICAO' )
