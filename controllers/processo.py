@@ -2,45 +2,40 @@
 from processoTable import *
 from tramitacoesTable import *
 import defaultTable
-import dbfunctions
 import forms
-from queryfilter import *
+from SIEProcesso import SIEProcessoDados, SIEProcessoTramitacoes
 
 def index():
-    tableDados = None
-    numProcesso = None
-    tableTramitacoes = None
-    processoCodigo = None
+    processosAPI = SIEProcessoDados()
+    tramitacoesAPI = SIEProcessoTramitacoes()
 
     try:
-        contents = dbfunctions.getDadosProcesso( request.vars.ID_DOCUMENTO )
+        processo = processosAPI.getProcessoDados(request.vars.ID_DOCUMENTO)
+        try:
+            contentsDict = {
+                            "Número Documento" : processo['ID_DOCUMENTO'],
+                            "Resumo Assunto" : processo['RESUMO_ASSUNTO'],
+                            "Nome do Interessado" : processo['NOME_TIPO_INTERESSADO'] + " - " + processo['NOME_INTERESSADO'],
+                            "Procedência" : processo['PROCEDENCIA'],
+                            "Código Assunto" : processo['COD_ESTRUTURADO'],
+                            "Assunto CONARQ" : processo['DESCR_ASSUNTO']
+                            }
 
-        processoCodigo = contents['NUM_PROCESSO']
+            tableDados = ProcessoTable( contentsDict )
 
-        contentsDict = {
-                        "Número Documento" : contents['ID_DOCUMENTO'],
-                        "Resumo Assunto" : contents['RESUMO_ASSUNTO'],
-                        "Nome do Interessado" : contents['NOME_TIPO_INTERESSADO'] + " - " + contents['NOME_INTERESSADO'],
-                        "Procedência" : contents['PROCEDENCIA'],
-                        "Código Assunto" : contents['COD_ESTRUTURADO'],
-                        "Assunto CONARQ" : contents['DESCR_ASSUNTO']
-                        }
-
-        tableDados = ProcessoTable( contentsDict )
-        tableDados = tableDados.printTable("table table-bordered")
-
-        tramitacoes = dbfunctions.getTramitacoes( contents['ID_DOCUMENTO'] )
-        tableTramitacoes = TramitacoesTable(
-                                            tramitacoes,
-                                            "Descrição Fluxo,Data Envio,Data Recebimento,Origem,Destino,Despacho,Recebido por".split(",")
-                                            )
-        tableTramitacoes = tableTramitacoes.printTable("table table-bordered")
-    except Exception, e:
-        response.flash = e
+            tramitacoes = tramitacoesAPI.getTramitacoes( processo["ID_DOCUMENTO"] )
+            tableTramitacoes = TramitacoesTable(
+                                                tramitacoes,
+                                                "Descrição Fluxo,Data Envio,Data Recebimento,Origem,Destino,Despacho,Recebido por".split(",")
+                                                )
+        except Exception:
+            response.flash = "Erro ao buscar tramitações para processo " + processo['COD_ESTRUTURADO']
+    except Exception:
+        response.flash = "Erro ao buscar dados para processo " + request.vars.ID_DOCUMENTO
 
     return dict(
-                numProcesso=numProcesso,
-                tableDados=tableDados,
-                tableTramitacoes=tableTramitacoes,
-                processoCodigo=processoCodigo
+                numProcesso=processo['COD_ESTRUTURADO'],
+                tableDados=tableDados.printTable("table table-bordered"),
+                tableTramitacoes=tableTramitacoes.printTable("table table-bordered"),
+                processoCodigo=processo['NUM_PROCESSO']
                 )

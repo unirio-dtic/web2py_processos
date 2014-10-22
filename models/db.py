@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-#########################################################################
-## Here is sample code if you need for
-## - email capabilities
-## - authentication (registration, login, logout, ... )
-## - authorization (role based authorization)
-## - services (xml, csv, json, xmlrpc, jsonrpc, amf, rss)
-## - crud actions
-## (more options discussed in gluon/tools.py)
-#########################################################################
-
 from gluon.tools import *
 
 mail = Mail()                                  # mailer

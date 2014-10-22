@@ -2,39 +2,39 @@
 from ProcessosTable import *
 from SIEProcesso import *
 from tramitacoesTable import *
-import defaultTable
 import forms
-from queryfilter import *
 
 def index():
     tableDados = None
     numProcesso = None
     tableProcessos = None
-    sieprocessos = SIEProcesso()
+    processosAPI = SIEProcessoDados()
 
     form = FORM(
-                forms.printControlGroup( "Descrição", "DESCR_ASSUNTO", INPUT(_name="DESCR_ASSUNTO") ),
-                forms.printControlGroup( "Nome do Interessado", "NOME_INTERESSADO", INPUT(_name="NOME_INTERESSADO") ),
-                forms.printControlGroup( "Emitente", "EMITENTE", INPUT(_name="EMITENTE") ),
-                forms.printControlGroup( "Número", "NUM_PROCESSO", INPUT(_name="NUM_PROCESSO") ),
-                INPUT(_type="submit")
-                )
+        forms.printControlGroup("Descrição", "DESCR_ASSUNTO", INPUT(_name="DESCR_ASSUNTO")),
+        forms.printControlGroup("Resumo do Assunto", "RESUMO_ASSUNTO", INPUT(_name="RESUMO_ASSUNTO")),
+        forms.printControlGroup("Nome do Interessado", "NOME_INTERESSADO", INPUT(_name="NOME_INTERESSADO")),
+        forms.printControlGroup("Emitente", "EMITENTE", INPUT(_name="EMITENTE")),
+        forms.printControlGroup("Número", "NUM_PROCESSO", INPUT(_name="NUM_PROCESSO")),
+        INPUT(_type="submit")
+    )
 
-    proc = sieprocessos.getProcessos()
-    
     if form.process().accepted:
         try:
             filtros = form.vars
-            queryFilter = QueryFilter(filtros)
-            tableProcessos = ProcessosTable(sieprocessos, "Número,Nome,Data".split(",") ).printTable("table table-bordered")
+            processos = processosAPI.getProcessos( filtros )
 
-        except Exception, e:
-            response.flash = e
+            tableProcessos = ProcessosTable(processos, "Número,Nome,Data".split(",")).printTable("table table-bordered")
+        except ValueError as e:
+            response.flash = "Nenhum resultado encontrado"
+        except Exception as e:
+            raise e
+
 
     return dict(
-                form=form,
-                tableProcessos=tableProcessos
-                )
+        form=form,
+        tableProcessos=tableProcessos
+    )
 
 
 def user():
@@ -53,6 +53,7 @@ def user():
     to decorate functions that need access control
     """
     return dict(form=auth())
+
 
 @cache.action()
 def download():
