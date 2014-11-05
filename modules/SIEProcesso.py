@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from unirio.api import UNIRIOAPIRequest
 from gluon import current
+from unirio.api import UNIRIOAPIRequest
 
 
 class SIEProcesso(object):
