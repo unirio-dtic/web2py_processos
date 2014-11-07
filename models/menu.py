@@ -6,7 +6,7 @@
 #########################################################################
 
 response.logo = A("DTIC/UNIRIO",
-                  _class="brand",_href="http://www.web2py.com/")
+                  _class="brand",_href="http://www.unirio.br/dtic")
 response.title = request.application.replace('_',' ').title()
 response.subtitle = ''
 

@@ -16,6 +16,10 @@ label{
     display:block;
 }
 
+.navbar{
+    background: #0081c2;
+}
+
 .navbar-inverse .navbar-inner{
     background: #0081c2;
     border-color: #0081c2;
