@@ -2,7 +2,6 @@
 from gluon import current
 from unirio.api import UNIRIOAPIRequest
 
-
 class SIEProcesso(object):
     def __init__(self):
         self.apiRequest = UNIRIOAPIRequest(current.kAPIKey)
