@@ -15,8 +15,8 @@ class TramitacoesTable(DefaultTable):
             row.append(TD(content['DESCR_FLUXO'], _class=self._bodyTRclass))
         else:
             row.append(TD("--resolver--", _class=self._bodyTRclass))
-        row.append(TD(datetime.datetime.strptime(content['DT_ENVIO'], '%Y-%m-%d %H:%M').strftime('%d/%m/%y %H:%M'), _class=self._bodyTRclass))
-        row.append(TD(datetime.datetime.strptime(content['DT_RECEBIMENTO'], '%Y-%m-%d %H:%M').strftime('%d/%m/%y %H:%M'), _class=self._bodyTRclass))
+        row.append(TD(content['DT_ENVIO'], _class=self._bodyTRclass))
+        row.append(TD(content['DT_RECEBIMENTO'], _class=self._bodyTRclass))
         row.append(TD(content['ORIGEM'], _class=self._bodyTRclass))
         row.append(TD(content['DESTINO'], _class=self._bodyTRclass))
         row.append(TD(content['DESPACHO'], _class=self._bodyTRclass))
