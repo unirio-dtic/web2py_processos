@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from gluon.html import *
 from DefaultTable import *
 
@@ -11,5 +12,5 @@ class ProcessosTable(DefaultTable):
         row = []
         row.append( TD(link, _class=self._bodyTRclass) )
         row.append( TD(content['NOME_INTERESSADO'], _class=self._bodyTRclass) )
-        row.append( TD(content['DT_ALTERACAO'], _class=self._bodyTRclass) )
+        row.append( TD(datetime.datetime.strptime(content['DT_ALTERACAO'], '%Y-%m-%d').strftime('%d/%m/%y'), _class=self._bodyTRclass) )
         return row
