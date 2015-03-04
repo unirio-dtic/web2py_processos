@@ -15,7 +15,7 @@ def index():
         forms.printControlGroup("Resumo do Assunto", "RESUMO_ASSUNTO", INPUT(_name="RESUMO_ASSUNTO")),
         forms.printControlGroup("Nome do Interessado", "NOME_INTERESSADO", INPUT(_name="NOME_INTERESSADO")),
         forms.printControlGroup("Emitente", "EMITENTE", INPUT(_name="EMITENTE")),
-        forms.printControlGroup("Número", "NUM_PROCESSO", INPUT(_name="NUM_PROCESSO")),
+        forms.printControlGroup("Número ( Favor digitar o número completo. Ex: 99999.999999/9999-99)", "NUM_PROCESSO", INPUT(_name="NUM_PROCESSO")),
         INPUT(_type="submit")
     )
 
