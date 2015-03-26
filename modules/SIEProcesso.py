@@ -5,7 +5,7 @@ from gluon import current
 class SIEProcesso(object):
     def __init__(self):
         self.apiRequest = current.api
-        self.path = ""
+        self.path = NotImplementedError
         self.lmin = 0
         self.lmax = 1000
 
