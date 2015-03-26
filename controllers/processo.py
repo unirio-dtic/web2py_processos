@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from processoTable import *
 from tramitacoesTable import *
-import defaultTable
-import forms
 from SIEProcesso import SIEProcessoDados, SIEProcessoTramitacoes
 
 
