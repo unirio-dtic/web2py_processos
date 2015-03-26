@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-# this file is released under public domain and you can use without limitations
-
-#########################################################################
-## Customize your APP title, subtitle and menus here
-#########################################################################
-
 response.logo = A("DTIC/UNIRIO",
                   _class="brand",_href="http://www.unirio.br/dtic")
 response.title = request.application.replace('_',' ').title()
