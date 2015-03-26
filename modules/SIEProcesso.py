@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from gluon import current
-from unirio.api import UNIRIOAPIRequest
+
 
 class SIEProcesso(object):
     def __init__(self):
-        self.apiRequest = UNIRIOAPIRequest(current.kAPIKey)
+        self.apiRequest = current.api
         self.path = ""
         self.lmin = 0
         self.lmax = 100
@@ -14,10 +14,10 @@ class SIEProcesso(object):
 
         :type params: dict
         """
-        limits = {"LMIN" : self.lmin, "LMAX" : self.lmax}
-        for k,v in params.items():
+        limits = {"LMIN": self.lmin, "LMAX": self.lmax}
+        for k, v in params.items():
             params[k] = str(params[k]).upper()
-        params.update( limits )
+        params.update(limits)
 
         processos = self.apiRequest.performGETRequest(self.path, params)
         return processos.content
@@ -32,7 +32,7 @@ class SIEProcessoDados(SIEProcesso):
         return self.getContent(params)
 
     def getProcessoDados(self, ID_DOCUMENTO):
-        params = {"ID_DOCUMENTO" : ID_DOCUMENTO}
+        params = {"ID_DOCUMENTO": ID_DOCUMENTO}
         content = self.getProcessos(params)
         return content[0]
 
@@ -43,5 +43,5 @@ class SIEProcessoTramitacoes(SIEProcesso):
         self.path = "V_PROCESSOS_TRAMITACOES"
 
     def getTramitacoes(self, NUM_PROCESSO):
-        params = {"NUM_PROCESSO" : NUM_PROCESSO}
+        params = {"NUM_PROCESSO": NUM_PROCESSO}
         return self.getContent(params)
