@@ -7,7 +7,7 @@ class SIEProcesso(object):
         self.apiRequest = current.api
         self.path = ""
         self.lmin = 0
-        self.lmax = 100
+        self.lmax = 1000
 
     def getContent(self, params={}):
         """
@@ -19,7 +19,7 @@ class SIEProcesso(object):
             params[k] = str(params[k]).upper()
         params.update(limits)
 
-        processos = self.apiRequest.performGETRequest(self.path, params)
+        processos = self.apiRequest.performGETRequest(self.path, params, cached=86400)
         return processos.content
 
 
