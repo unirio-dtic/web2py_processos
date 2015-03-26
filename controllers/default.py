@@ -21,9 +21,11 @@ def index():
     if form.process().accepted:
         try:
             filtros = form.vars
-            processos = processosAPI.getProcessos( filtros )
+            filtros.update({'ORDERBY': 'DT_ALTERACAO'})
+            processos = processosAPI.getProcessos(filtros)
 
             tableProcessos = ProcessosTable(processos, "Número,Nome,Data".split(",")).printTable("table table-bordered")
+            response.flash = "%d processos encontrados." % len(processos)
         except ValueError:
             response.flash = "Nenhum resultado encontrado"
 
