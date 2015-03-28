@@ -7,11 +7,12 @@ Para que o mesmo funcione, adicione um novo modelo (por exemplo: `models/1.py`) 
 
 ```python
 # -*- coding: utf-8 -*-
+from unirio.api import UNIRIOAPIRequest
 from gluon import current
 
+kAPIKey = "73cf4de9b6be2387e01e6f8d101786a9c8f04dc7c81e172288dab5ffc5b609da5bc3c86z8df0d8f939d6e409a77d65c9a"
 
-db = DAL('postgres://theusername:supersecret@localhost/processos')
-kAPIKey = "62e1c0e9jh4fcuhruivhzui4vhtiuxgek4ht7if478t3d7yj39xkkqy309tsky78939d6e409a77d65c9a" 
+api = UNIRIOAPIRequest(kAPIKey)
+current.api = api
 
-current.kAPIKey = kAPIKey
 ```
