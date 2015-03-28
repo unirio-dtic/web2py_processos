@@ -19,12 +19,14 @@ def index():
     )
 
     if form.process().accepted:
+        redirect(URL('default', 'index', vars=form.vars))
+    elif request.vars:
         try:
-            filtros = form.vars
+            filtros = request.vars
             filtros.update({'ORDERBY': 'DT_ALTERACAO'})
             processos = processosAPI.getProcessos(filtros)
 
-            tableProcessos = ProcessosTable(processos, "Número,Nome,Data".split(",")).printTable("table table-bordered")
+            tableProcessos = ProcessosTable(processos, ('Número', 'Nome', 'Data')).printTable("table table-bordered")
             response.flash = "%d processos encontrados." % len(processos)
         except ValueError:
             response.flash = "Nenhum resultado encontrado"

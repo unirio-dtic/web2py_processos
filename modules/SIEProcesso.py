@@ -4,7 +4,7 @@ from gluon import current
 
 class SIEProcesso(object):
     def __init__(self):
-        self.apiRequest = current.api
+        self.api = current.api
         self.path = NotImplementedError
         self.lmin = 0
         self.lmax = 1000
@@ -19,7 +19,7 @@ class SIEProcesso(object):
             params[k] = str(params[k]).upper()
         params.update(limits)
 
-        processos = self.apiRequest.performGETRequest(self.path, params, cached=86400)
+        processos = self.api.performGETRequest(self.path, params, cached=86400)
         return processos.content
 
 
@@ -43,5 +43,5 @@ class SIEProcessoTramitacoes(SIEProcesso):
         self.path = "V_PROCESSOS_TRAMITACOES"
 
     def getTramitacoes(self, NUM_PROCESSO):
-        params = {"NUM_PROCESSO": NUM_PROCESSO}
+        params = {"NUM_PROCESSO": NUM_PROCESSO, "ORDERBY": "DT_ENVIO"}
         return self.getContent(params)
