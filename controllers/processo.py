@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from processoTable import *
 from tramitacoesTable import *
-from SIEProcesso import SIEProcessoDados, SIEProcessoTramitacoes
+# TODO trocar a referencia para sie.SIEProcesso
+from applications.web2py_processos.modules.sie.SIEProcesso import SIEProcessoDados, SIEProcessoTramitacoes
 
 
 def index():
