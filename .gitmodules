@@ -1,0 +1,6 @@
+[submodule "modules/sie"]
+	path = modules/sie
+	url = http://git.unirio.br/desenvolvimento-web2py/sie_dao.git
+[submodule "modules/unirio/api"]
+	path = modules/unirio/api
+	url = http://git.unirio.br/desenvolvimento-web2py/api_client.git
