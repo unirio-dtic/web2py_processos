@@ -9,7 +9,7 @@ def index():
     tramitacoesAPI = SIEProcessoTramitacoes()
 
     try:
-        processo = processosAPI.getProcessoDados(request.vars.ID_DOCUMENTO)
+        processo = processosAPI.get_processo_dados(request.vars.ID_DOCUMENTO)
         try:
             contentsDict = {
                 "Número Documento": processo['ID_DOCUMENTO'],
@@ -22,7 +22,7 @@ def index():
 
             tableDados = ProcessoTable(contentsDict)
 
-            tramitacoes = tramitacoesAPI.getTramitacoes(processo["NUM_PROCESSO"])
+            tramitacoes = tramitacoesAPI.get_tramitacoes(processo["NUM_PROCESSO"])
             tableTramitacoes = TramitacoesTable(
                 tramitacoes,
                 "Descrição Fluxo,Data Envio,Data Recebimento,Origem,Destino,Despacho,Recebido por".split(",")

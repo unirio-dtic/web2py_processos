@@ -24,7 +24,7 @@ def index():
         try:
             filtros = request.vars
             filtros.update({'ORDERBY': 'DT_ALTERACAO'})
-            processos = processosAPI.getProcessos(filtros)
+            processos = processosAPI.get_processos(filtros)
 
             tableProcessos = ProcessosTable(processos, ('Número', 'Nome', 'Data')).printTable("table table-bordered")
             response.flash = "%d processos encontrados." % len(processos)
