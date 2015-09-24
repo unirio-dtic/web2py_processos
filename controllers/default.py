@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# TODO trocar a referencia para sie.SIEProcesso
-from applications.web2py_processos.modules.sie.SIEProcesso import SIEProcessoDados
+from sie.SIEProcesso import SIEProcessoDados
 from ProcessosTable import *
 from tramitacoesTable import *
 import forms
