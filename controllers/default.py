@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+
 from sie.SIEProcesso import SIEProcessoDados
 from tables import ProcessosTable
 import forms
 
 
 def index():
-    tableProcessos = None
-    processosAPI = SIEProcessoDados()
+    table_processos = None
+    processos_api = SIEProcessoDados()
 
     form = FORM(
         forms.printControlGroup("Descrição", "DESCR_ASSUNTO", INPUT(_name="DESCR_ASSUNTO")),
@@ -23,14 +24,14 @@ def index():
         try:
             filtros = request.vars
             filtros.update({'ORDERBY': 'DT_ALTERACAO'})
-            processos = processosAPI.get_processos(filtros)
+            processos = processos_api.get_processos(filtros)
 
-            tableProcessos = ProcessosTable(processos, ('Número', 'Nome', 'Data')).printTable("table table-bordered")
+            table_processos = ProcessosTable(processos, ('Número', 'Nome', 'Data')).print_table("table table-bordered")
             response.flash = "%d processos encontrados." % len(processos)
         except ValueError:
             response.flash = "Nenhum resultado encontrado"
 
     return dict(
         form=form,
-        tableProcessos=tableProcessos
+        tableProcessos=table_processos
     )

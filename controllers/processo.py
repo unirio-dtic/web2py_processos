@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from tables import ProcessoTable, TramitacoesTable
+from tables import DetalheProcessoTable, TramitacoesTable
 from sie.SIEProcesso import SIEProcessoDados, SIEProcessoTramitacoes
 
 
+# noinspection PyBroadException
 def index():
-    processosAPI = SIEProcessoDados()
-    tramitacoesAPI = SIEProcessoTramitacoes()
+    processos_api = SIEProcessoDados()
+    tramitacoes_api = SIEProcessoTramitacoes()
 
     try:
-        processo = processosAPI.get_processo_dados(request.vars.ID_DOCUMENTO)
+        processo = processos_api.get_processo_dados(request.vars.ID_DOCUMENTO)
         try:
-            contentsDict = {
+            contents_dict = {
                 "Número Documento": processo['ID_DOCUMENTO'],
                 "Resumo Assunto": processo['RESUMO_ASSUNTO'],
                 "Nome do Interessado": processo['NOME_TIPO_INTERESSADO'] + " - " + processo['NOME_INTERESSADO'],
@@ -20,18 +21,18 @@ def index():
                 "Assunto CONARQ": processo['DESCR_ASSUNTO']
             }
 
-            tableDados = ProcessoTable(contentsDict)
+            table_dados = DetalheProcessoTable(contents_dict)
 
-            tramitacoes = tramitacoesAPI.get_tramitacoes(processo["NUM_PROCESSO"])
-            tableTramitacoes = TramitacoesTable(
+            tramitacoes = tramitacoes_api.get_tramitacoes(processo["NUM_PROCESSO"])
+            table_tramitacoes = TramitacoesTable(
                 tramitacoes,
                 "Descrição Fluxo,Data Envio,Data Recebimento,Origem,Destino,Despacho,Recebido por".split(",")
             )
 
             return dict(
                 numProcesso=processo['COD_ESTRUTURADO'],
-                tableDados=tableDados.printTable("table table-bordered"),
-                tableTramitacoes=tableTramitacoes.printTable("table table-bordered"),
+                tableDados=table_dados.print_table("table table-bordered"),
+                tableTramitacoes=table_tramitacoes.print_table("table table-bordered"),
                 processoCodigo=processo['NUM_PROCESSO']
             )
 

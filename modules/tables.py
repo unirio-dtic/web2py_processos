@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import datetime
 from gluon.html import *
 
@@ -11,68 +12,68 @@ class DefaultTable(object):
     _bodyTRclass = None
     _bodyTDclass = None
 
-    def __init__(self, contents, titleList=None):
+    def __init__(self, contents, title_list=None):
         self.contents = contents
-        self._titleList = titleList
+        self._titleList = title_list
 
-    def printTable(self, tableClass=None):
-        return TABLE(self.getTableHead(), self.getTableBody(), _class=tableClass)
+    def print_table(self, table_class=None):
+        return TABLE(self.get_table_head(), self.get_table_body(), _class=table_class)
 
     # print THEAD(TR(TH('<hello>')), _class='test', _id=0)
-    def getTableHead(self, tdClass=None, trClass=None):
+    def get_table_head(self, td_class=None, tr_class=None):
         heads = []
         for title in self._titleList:
             heads.append(TD(SPAN(title), _class=self._headTDclass))
         return THEAD(TR(heads, _class=self._headTRclass))
 
-    def getTableBody(self):
-        return TBODY(self.getTableRows())
+    def get_table_body(self):
+        return TBODY(self.get_table_rows())
 
-    def getTableRows(self):
+    def get_table_rows(self):
         rows = []
         for content in self.contents:
-            rows.append(TR(self.getRowContent(content), _class=self._bodyTRclass))
+            rows.append(TR(self.get_row_content(content), _class=self._bodyTRclass))
         return rows
 
-    def getRowContent(self, content):
+    def get_row_content(self, content):
         pass
 
 
 class ProcessosTable(DefaultTable):
-    def __init__(self, contents, titleList):
-        DefaultTable.__init__(self, contents, titleList)
+    def __init__(self, contents, title_list):
+        DefaultTable.__init__(self, contents, title_list)
 
-    def getRowContent(self, content):
-        link = A(content['NUM_PROCESSO'], _href=URL('processo','index', vars={'ID_DOCUMENTO' : content['ID_DOCUMENTO']} ))
-        row = []
-        row.append( TD(link, _class=self._bodyTRclass) )
-        row.append( TD(content['NOME_INTERESSADO'], _class=self._bodyTRclass) )
-        row.append( TD(datetime.datetime.strptime(content['DT_ALTERACAO'], '%Y-%m-%d').strftime('%d/%m/%Y'), _class=self._bodyTRclass) )
+    def get_row_content(self, content):
+        link = A(content['NUM_PROCESSO'], _href=URL('processo', 'index', vars={'ID_DOCUMENTO': content['ID_DOCUMENTO']}))
+        row = list()
+        row.append(TD(link, _class=self._bodyTRclass))
+        row.append(TD(content['NOME_INTERESSADO'], _class=self._bodyTRclass) )
+        row.append(TD(datetime.datetime.strptime(content['DT_ALTERACAO'], '%Y-%m-%d').strftime('%d/%m/%Y'), _class=self._bodyTRclass))
         return row
 
 
-class ProcessoTable(DefaultTable):
-    def __init__(self, contentsDict):
-        DefaultTable.__init__(self, contentsDict)
+class DetalheProcessoTable(DefaultTable):
+    def __init__(self, contents_dict):
+        DefaultTable.__init__(self, contents_dict)
 
-    def printTable(self, tableClass=None):
-        return TABLE( self.getTableBody(), _class=tableClass)
+    def print_table(self, table_class=None):
+        return TABLE( self.get_table_body(), _class=table_class)
 
-    def getTableRows(self):
+    def get_table_rows(self):
         rows = []
         for contentKey, contentValue in sorted( self.contents.iteritems() ):
-            rows.append( TR( self.getRowContent(contentKey, contentValue), _class=self._bodyTRclass) )
+            rows.append(TR(self.get_row_content(contentKey, contentValue), _class=self._bodyTRclass))
         return rows
 
-    def getRowContent(self, contentKey, contentValue):
-        row = []
-        row.append( TD(contentKey, _class=self._bodyTRclass) )
-        row.append( TD(contentValue, _class=self._bodyTRclass) )
+    def get_row_content(self, contentKey, contentValue):
+        row = list()
+        row.append(TD(contentKey, _class=self._bodyTRclass))
+        row.append(TD(contentValue, _class=self._bodyTRclass))
         return row
 
 
 class TramitacoesTable(DefaultTable):
-    def getRowContent(self, content):
+    def get_row_content(self, content):
         """
         :type content: dict
         """
