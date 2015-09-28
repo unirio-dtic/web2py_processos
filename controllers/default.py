@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from sie.SIEProcesso import SIEProcessoDados
-from ProcessosTable import *
-from tramitacoesTable import *
+from tables import ProcessosTable
 import forms
 
 
